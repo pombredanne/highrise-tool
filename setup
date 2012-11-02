@@ -1,6 +1,7 @@
 #!/usr/bin/env coffee
 
 fs = require 'fs'
+{exec} = require 'child_process'
 
 if process.argv.length < 3
   console.warn "Usage: #{process.argv[1]} <username> <password>"
@@ -8,7 +9,7 @@ if process.argv.length < 3
 
 [username, password] = process.argv[2..3]
 
-settings_path = '/home/chris/scraperwiki.json'
+settings_path = "#{process.env.HOME}/scraperwiki.json"
 settings = JSON.parse fs.readFileSync(settings_path)
 
 settings.highrise = {}
@@ -17,3 +18,7 @@ settings.highrise.password = password
 
 fs.writeFileSync settings_path, JSON.stringify(settings, null, 2)
 
+scraper = exec './scraper.py', (err, stdout, stderr) ->
+  console.warn err if err?
+  process.stdout.write stdout if stdout?
+  process.stderr.write stderr if stderr?
