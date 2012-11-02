@@ -1,0 +1,29 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.3/coffee-script.min.js"></script>
+
+<h1>Enter your username and password</h1>
+u: <input type='text' name='username'>
+p: <input type='password' name='password'>
+
+<button id="import">Import</button>
+
+<script type="text/coffeescript">
+    $ ->
+    [user, apikey, box] = \
+      [window.user, window.apikey, window.box]
+
+      $('#import').on 'click', ->
+        highrise_user = $('username').text()
+        highrise_pwd = $('password').text()
+
+        $.ajax
+        url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
+          type: 'POST'
+          data:
+            apikey: apikey
+            cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
+          success: ->
+              alert 'success?'
+          error: (jqXHR, textStatus, errorThrown) ->
+            console.log jqXHR.responseText
+
+</script>
