@@ -1,0 +1,19 @@
+#!/usr/bin/env coffee
+
+fs = require 'fs'
+
+if process.argv.length < 3
+  console.warn "Usage: #{process.argv[1]} <username> <password>"
+  process.exit 1
+
+[username, password] = process.argv[2..3]
+
+settings_path = '/home/chris/scraperwiki.json'
+settings = JSON.parse fs.readFileSync(settings_path)
+
+settings.highrise = {}
+settings.highrise.username = username
+settings.highrise.password = password
+
+fs.writeFileSync settings_path, JSON.stringify(settings, null, 2)
+
