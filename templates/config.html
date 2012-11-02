@@ -7,11 +7,14 @@ p: <input type='password' name='password'>
 <button id="import">Import</button>
 
 <script type="text/coffeescript">
+    console.log 'executed coffeescript'
     $ ->
+    console.log 'document ready'
     [user, apikey, box] = \
       [window.user, window.apikey, window.box]
 
       $('#import').on 'click', ->
+        console.log 'import clicked'
         highrise_user = $('username').text()
         highrise_pwd = $('password').text()
 
