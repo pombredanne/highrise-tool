@@ -11,12 +11,12 @@ $ ->
     highrise_pwd = $('password').text()
 
     $.ajax
-    url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
-      type: 'POST'
-      data:
-        apikey: apikey
-        cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
-      success: ->
-          alert 'success?'
-      error: (jqXHR, textStatus, errorThrown) ->
-        console.log jqXHR.responseText
+      url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
+        type: 'POST'
+        data:
+          apikey: apikey
+          cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
+        success: ->
+            alert 'success?'
+        error: (jqXHR, textStatus, errorThrown) ->
+          console.log jqXHR.responseText

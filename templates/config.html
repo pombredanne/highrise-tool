@@ -19,8 +19,7 @@ p: <input type='password' name='password'>
       console.log('import clicked');
       highrise_user = $('username').text();
       highrise_pwd = $('password').text();
-      $.ajax;
-      return {
+      return $.ajax({
         url: ("http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec")({
           type: 'POST',
           data: {
@@ -34,7 +33,7 @@ p: <input type='password' name='password'>
             return console.log(jqXHR.responseText);
           }
         })
-      };
+      });
     });
   });
 
