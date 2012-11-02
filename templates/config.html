@@ -20,19 +20,18 @@ p: <input type='password' name='password'>
       highrise_user = $('username').text();
       highrise_pwd = $('password').text();
       return $.ajax({
-        url: ("http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec")({
-          type: 'POST',
-          data: {
-            apikey: apikey,
-            cmd: "cd ~/highrise; ./setup  " + highrise_user + " " + highrise_pwd
-          },
-          success: function() {
-            return alert('success?');
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            return console.log(jqXHR.responseText);
-          }
-        })
+        url: "http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec",
+        type: 'POST',
+        data: {
+          apikey: apikey,
+          cmd: "cd ~/highrise; ./setup  " + highrise_user + " " + highrise_pwd
+        },
+        success: function() {
+          return alert('success?');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          return console.log(jqXHR.responseText);
+        }
       });
     });
   });
