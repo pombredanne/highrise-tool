@@ -1,6 +1,6 @@
 <h1>Enter your username and password</h1>
-u: <input type='text' name='username'>
-p: <input type='password' name='password'>
+u: <input type='text' id='username'>
+p: <input type='password' id='password'>
 
 <button id="import">Import</button>
 
@@ -17,8 +17,8 @@ p: <input type='password' name='password'>
     return $('#import').on('click', function() {
       var highrise_pwd, highrise_user;
       console.log('import clicked');
-      highrise_user = $('username').text();
-      highrise_pwd = $('password').text();
+      highrise_user = $('#username').val();
+      highrise_pwd = $('#password').val();
       return $.ajax({
         url: "http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec",
         type: 'POST',

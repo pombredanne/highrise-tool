@@ -7,8 +7,8 @@ $ ->
 
   $('#import').on 'click', ->
     console.log 'import clicked'
-    highrise_user = $('username').text()
-    highrise_pwd = $('password').text()
+    highrise_user = $('#username').val()
+    highrise_pwd = $('#password').val()
 
     $.ajax
       url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
