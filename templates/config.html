@@ -1,4 +1,5 @@
 <h1>Enter your username and password</h1>
+<div id="output"></div>
 u: <input type='text' id='username'>
 p: <input type='password' id='password'>
 
@@ -26,8 +27,8 @@ p: <input type='password' id='password'>
           apikey: apikey,
           cmd: "cd ~/highrise; ./setup  " + highrise_user + " " + highrise_pwd
         },
-        success: function() {
-          return alert('success?');
+        success: function(jqXHR, textStatus, errorThrown) {
+          return $('#output').text(jqXHR.responseText);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           return console.log(jqXHR.responseText);
