@@ -1,32 +1,42 @@
-<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.3.3/coffee-script.min.js"></script>
-
 <h1>Enter your username and password</h1>
 u: <input type='text' name='username'>
 p: <input type='password' name='password'>
 
 <button id="import">Import</button>
 
-<script type="text/coffeescript">
-    console.log 'executed coffeescript'
-    $ ->
-    console.log 'document ready'
-    [user, apikey, box] = \
-      [window.user, window.apikey, window.box]
+<script type="text/javascript">
 
-      $('#import').on 'click', ->
-        console.log 'import clicked'
-        highrise_user = $('username').text()
-        highrise_pwd = $('password').text()
+(function() {
 
-        $.ajax
-        url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
-          type: 'POST'
-          data:
-            apikey: apikey
-            cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
-          success: ->
-              alert 'success?'
-          error: (jqXHR, textStatus, errorThrown) ->
-            console.log jqXHR.responseText
+  console.log('executed coffeescript');
 
+  $(function() {
+    var apikey, box, user, _ref;
+    console.log('document ready');
+    _ref = [window.user, window.apikey, window.box], user = _ref[0], apikey = _ref[1], box = _ref[2];
+    return $('#import').on('click', function() {
+      var highrise_pwd, highrise_user;
+      console.log('import clicked');
+      highrise_user = $('username').text();
+      highrise_pwd = $('password').text();
+      $.ajax;
+      return {
+        url: ("http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec")({
+          type: 'POST',
+          data: {
+            apikey: apikey,
+            cmd: "cd ~/highrise; ./setup  " + highrise_user + " " + highrise_pwd
+          },
+          success: function() {
+            return alert('success?');
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            return console.log(jqXHR.responseText);
+          }
+        })
+      };
+    });
+  });
+
+}).call(this);
 </script>

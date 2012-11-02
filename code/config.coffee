@@ -1,0 +1,22 @@
+console.log 'executed coffeescript'
+
+$ ->
+  console.log 'document ready'
+  [user, apikey, box] = \
+    [window.user, window.apikey, window.box]
+
+  $('#import').on 'click', ->
+    console.log 'import clicked'
+    highrise_user = $('username').text()
+    highrise_pwd = $('password').text()
+
+    $.ajax
+    url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
+      type: 'POST'
+      data:
+        apikey: apikey
+        cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
+      success: ->
+          alert 'success?'
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log jqXHR.responseText
