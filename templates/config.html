@@ -27,8 +27,8 @@ p: <input type='password' id='password'>
           apikey: apikey,
           cmd: "cd ~/highrise; ./setup  " + highrise_user + " " + highrise_pwd
         },
-        success: function(jqXHR, textStatus, errorThrown) {
-          return $('#output').text(jqXHR.responseText);
+        success: function(text) {
+          return $('#output').text(text);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           return console.log(jqXHR.responseText);

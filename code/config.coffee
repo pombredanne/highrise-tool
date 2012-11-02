@@ -16,7 +16,7 @@ $ ->
       data:
         apikey: apikey
         cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
-      success: (jqXHR, textStatus, errorThrown) ->
-          $('#output').text jqXHR.responseText
+      success: (text) ->
+          $('#output').text text
       error: (jqXHR, textStatus, errorThrown) ->
         console.log jqXHR.responseText
