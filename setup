@@ -4,8 +4,8 @@ fs = require 'fs'
 {exec} = require 'child_process'
 
 if process.argv.length < 3
-  console.warn "Usage: #{process.argv[1]} <username> <password> <domain>"
-  process.exit 1
+  process.stdout.write fs.readFileSync('./highrise/templates/config.html')
+  process.exit
 
 [ username, password, domain ] = process.argv[2..4]
 
