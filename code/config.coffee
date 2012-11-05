@@ -7,10 +7,10 @@ $ ->
   $('#domain').val 'scraperwiki.highrisehq.com'
 
   $('#import').on 'click', ->
-    user = $('#username').val()
-    pwd = $('#password').val()
-    domain = $('#domain').val()
-    cmd = "cd ~/highrise; ./setup  #{user} #{pwd} #{domain}"
+    hr_user = $('#username').val()
+    hr_pwd = $('#password').val()
+    hr_domain = $('#domain').val()
+    cmd = "cd ~/highrise; ./setup  #{hr_user} #{hr_pwd} #{hr_domain}"
 
     $.ajax
       url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
