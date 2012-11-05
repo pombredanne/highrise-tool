@@ -1,5 +1,3 @@
-console.log 'executed coffeescript'
-
 $ ->
   [user, apikey, box] = \
     [window.user, window.apikey, window.box]

@@ -7,21 +7,18 @@ d: <input type='text' id='domain'>
 <button id="import">Import</button>
 
 <script type="text/javascript">
-
 (function() {
-
-  console.log('executed coffeescript');
 
   $(function() {
     var apikey, box, user, _ref;
     _ref = [window.user, window.apikey, window.box], user = _ref[0], apikey = _ref[1], box = _ref[2];
     $('#domain').val('scraperwiki.highrisehq.com');
     return $('#import').on('click', function() {
-      var cmd, domain, pwd;
-      user = $('#username').val();
-      pwd = $('#password').val();
-      domain = $('#domain').val();
-      cmd = "cd ~/highrise; ./setup  " + user + " " + pwd + " " + domain;
+      var cmd, hr_domain, hr_pwd, hr_user;
+      hr_user = $('#username').val();
+      hr_pwd = $('#password').val();
+      hr_domain = $('#domain').val();
+      cmd = "cd ~/highrise; ./setup  " + hr_user + " " + hr_pwd + " " + hr_domain;
       return $.ajax({
         url: "http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec",
         type: 'POST',
