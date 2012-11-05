@@ -4,10 +4,10 @@ fs = require 'fs'
 {exec} = require 'child_process'
 
 if process.argv.length < 3
-  console.warn "Usage: #{process.argv[1]} <username> <password>"
+  console.warn "Usage: #{process.argv[1]} <username> <password> <domain>"
   process.exit 1
 
-[username, password] = process.argv[2..3]
+[ username, password, domain ] = process.argv[2..4]
 
 settings_path = "#{process.env.HOME}/scraperwiki.json"
 settings = JSON.parse fs.readFileSync(settings_path)
@@ -16,6 +16,7 @@ settings.database = 'highrise/scraperwiki.sqlite'
 settings.highrise = {}
 settings.highrise.username = username
 settings.highrise.password = password
+settings.highrise.domain = domain
 
 fs.writeFileSync settings_path, JSON.stringify(settings, null, 2)
 

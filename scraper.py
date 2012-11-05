@@ -16,12 +16,14 @@ user_list = {}
 def get_settings():
     with open('../scraperwiki.json') as f:
         settings = json.load(f)
-        return settings['highrise']['username'], settings['highrise']['password']
+        return settings['highrise']['username'], \
+               settings['highrise']['password'], \
+               settings['highrise']['domain']
 
 def setup():
     global user_list
     
-    users = parse_xml('https://scraperwiki.highrisehq.com/users.xml')
+    users = parse_xml('https://%s/users.xml' % DOMAIN)
     for user in users.cssselect('user'):
         id = int(user.cssselect('id')[0].text)
         name = user.cssselect('name')[0].text
@@ -73,7 +75,7 @@ def get_session():
 def get_deals():
     deal_lookup={'deal_name':'name', 'deal_id':'id', 'owner_id':'responsible-party-id', 'created':'created-at', 'updated':'updated-at', 'super_status':'status', 'price':'price'}
     
-    deals = parse_xml('https://scraperwiki.highrisehq.com/deals.xml').cssselect('deals deal')
+    deals = parse_xml('https://%s/deals.xml' % DOMAIN).cssselect('deals deal')
      
     dealbuilder=[]
     for deal in deals:
@@ -124,9 +126,8 @@ def get_deals():
     
     scraperwiki.sqlite.save(['deal_id'], dealbuilder, 'deals')
 
-USERNAME, PASSWORD = get_settings()
+USERNAME, PASSWORD, DOMAIN = get_settings()
 APIKEY = None
 get_session()
 setup()
 get_deals()
-
