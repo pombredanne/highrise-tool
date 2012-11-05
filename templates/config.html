@@ -1,6 +1,4 @@
-<div style="margin: 0px auto; width: 500px">
-
-<div id="output"></div>
+<div id="highrise-setup" style="margin: 0px auto; width: 500px">
 
 <h2 style="text-align: center">Enter your username and password</h2>
 <div class="form-horizontal">
@@ -49,10 +47,10 @@
           cmd: cmd
         },
         success: function(text) {
-          return $('#output').text(text);
+          return $('#highrise-setup').html('<div class="alert alert-success"><strong>Great!</strong> Your data has been imported. <a href="#">Take a look &rarr;</a></div>');
         },
         error: function(jqXHR, textStatus, errorThrown) {
-          return console.log(jqXHR.responseText);
+          return $('#highrise-setup').prepend('<div class="alert alert-error"><strong>On noes!</strong> ' + jqXHR.responseText);
         }
       });
     });

@@ -15,6 +15,6 @@ $ ->
         apikey: apikey
         cmd: cmd
       success: (text) ->
-          $('#output').text text
+        $('#highrise-setup').html('<div class="alert alert-success"><strong>Great!</strong> Your data has been imported. <a href="#">Take a look &rarr;</a></div>');
       error: (jqXHR, textStatus, errorThrown) ->
-        console.log jqXHR.responseText
+        $('#highrise-setup').prepend('<div class="alert alert-error"><strong>On noes!</strong> ' + jqXHR.responseText);
