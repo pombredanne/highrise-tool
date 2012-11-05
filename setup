@@ -12,6 +12,7 @@ if process.argv.length < 3
 settings_path = "#{process.env.HOME}/scraperwiki.json"
 settings = JSON.parse fs.readFileSync(settings_path)
 
+settings.database = 'highrise/scraperwiki.sqlite'
 settings.highrise = {}
 settings.highrise.username = username
 settings.highrise.password = password

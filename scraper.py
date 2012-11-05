@@ -30,7 +30,6 @@ def setup():
 def get_xml(url):
     global APIKEY
     r=requests.get(url, auth=(APIKEY,'X'), verify=False)
-    print r.content
     return r.content
 
 def parse_xml(url):
@@ -53,7 +52,6 @@ def get_session():
     s = requests.session()
     dom = lxml.html.fromstring(s.get('https://launchpad.37signals.com/highrise/signin', verify=False).content)
     token = dom.cssselect('input[name=authenticity_token]')[0].get('value')
-    print token
     params = {}
     params['username'] = USERNAME
     params['password'] = PASSWORD
@@ -69,7 +67,6 @@ def get_session():
 
     dom = lxml.html.fromstring(r.content)
     APIKEY = dom.cssselect('#token')[0].text_content()
-    print "apikey", APIKEY
 
     return r
 
