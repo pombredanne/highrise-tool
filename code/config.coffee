@@ -2,8 +2,6 @@ $ ->
   [user, apikey, box] = \
     [window.user, window.apikey, window.box]
 
-  $('#domain').val 'scraperwiki.highrisehq.com'
-
   $('#import').on 'click', ->
     hr_user = $('#username').val()
     hr_pwd = $('#password').val()
