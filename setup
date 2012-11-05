@@ -20,6 +20,8 @@ settings.highrise.domain = domain
 
 fs.writeFileSync settings_path, JSON.stringify(settings, null, 2)
 
+exec 'crontab < crontab'
+
 scraper = exec './scraper.py', (err, stdout, stderr) ->
   console.warn err if err?
   process.stdout.write stdout if stdout?

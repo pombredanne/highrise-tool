@@ -1,0 +1,2 @@
+44 1 * * * crontab < ~/highrise/crontab
+@daily cd ~/highrise && ./scraper.py
