@@ -1,21 +1,23 @@
 console.log 'executed coffeescript'
 
 $ ->
-  console.log 'document ready'
   [user, apikey, box] = \
     [window.user, window.apikey, window.box]
 
+  $('#domain').val 'scraperwiki.highrisehq.com'
+
   $('#import').on 'click', ->
-    console.log 'import clicked'
-    highrise_user = $('#username').val()
-    highrise_pwd = $('#password').val()
+    user = $('#username').val()
+    pwd = $('#password').val()
+    domain = $('#domain').val()
+    cmd = "cd ~/highrise; ./setup  #{user} #{pwd} #{domain}"
 
     $.ajax
       url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
       type: 'POST'
       data:
         apikey: apikey
-        cmd:  "cd ~/highrise; ./setup  #{highrise_user} #{highrise_pwd}"
+        cmd: cmd
       success: (text) ->
           $('#output').text text
       error: (jqXHR, textStatus, errorThrown) ->

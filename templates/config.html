@@ -2,6 +2,7 @@
 <div id="output"></div>
 u: <input type='text' id='username'>
 p: <input type='password' id='password'>
+d: <input type='text' id='domain'>
 
 <button id="import">Import</button>
 
@@ -13,19 +14,20 @@ p: <input type='password' id='password'>
 
   $(function() {
     var apikey, box, user, _ref;
-    console.log('document ready');
     _ref = [window.user, window.apikey, window.box], user = _ref[0], apikey = _ref[1], box = _ref[2];
+    $('#domain').val('scraperwiki.highrisehq.com');
     return $('#import').on('click', function() {
-      var highrise_pwd, highrise_user;
-      console.log('import clicked');
-      highrise_user = $('#username').val();
-      highrise_pwd = $('#password').val();
+      var cmd, domain, pwd;
+      user = $('#username').val();
+      pwd = $('#password').val();
+      domain = $('#domain').val();
+      cmd = "cd ~/highrise; ./setup  " + user + " " + pwd + " " + domain;
       return $.ajax({
         url: "http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec",
         type: 'POST',
         data: {
           apikey: apikey,
-          cmd: "cd ~/highrise; ./setup  " + highrise_user + " " + highrise_pwd
+          cmd: cmd
         },
         success: function(text) {
           return $('#output').text(text);
