@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from __future__ import division
+import sys
 import scraperwiki
 import lxml.html
 import requests
@@ -23,7 +24,11 @@ def get_settings():
 def setup():
     global user_list
     
-    users = parse_xml('https://%s/users.xml' % DOMAIN)
+    xml = get_xml('https://%s/users.xml' % DOMAIN)
+    if xml == None or xml.strip() == '':
+        sys.stderr.write("Couldn't connect to your domain: please check it.")
+        exit(1)
+    users = lxml.html.fromstring(xml)
     for user in users.cssselect('user'):
         id = int(user.cssselect('id')[0].text)
         name = user.cssselect('name')[0].text
@@ -31,11 +36,11 @@ def setup():
     
 def get_xml(url):
     global APIKEY
-    r=requests.get(url, auth=(APIKEY,'X'), verify=False)
+    try:
+        r=requests.get(url, auth=(APIKEY,'X'), verify=False)
+    except:
+        return None
     return r.content
-
-def parse_xml(url):
-    return lxml.html.fromstring(get_xml(url))
 
 def get_text(item):
     try:
@@ -64,6 +69,11 @@ def get_session():
     r = s.post('https://launchpad.37signals.com/session', params, verify=False)
     url = r.url
     dom = lxml.html.fromstring(r.content)
+    if 'failed_authentication=true' in url:
+        errmsg = dom.cssselect('#login_dialog h2')[0].text_content()
+        sys.stderr.write(errmsg)
+        exit(1)
+
     user_id = dom.xpath('.//meta[@name="current-user"]')[0].get('content')
     r = s.get(urlparse.urljoin(url, '/users/%s/edit' % user_id))
 
@@ -75,7 +85,7 @@ def get_session():
 def get_deals():
     deal_lookup={'deal_name':'name', 'deal_id':'id', 'owner_id':'responsible-party-id', 'created':'created-at', 'updated':'updated-at', 'super_status':'status', 'price':'price'}
     
-    deals = parse_xml('https://%s/deals.xml' % DOMAIN).cssselect('deals deal')
+    deals = lxml.html.fromstring(get_xml('https://%s/deals.xml' % DOMAIN).cssselect('deals deal'))
      
     dealbuilder=[]
     for deal in deals:

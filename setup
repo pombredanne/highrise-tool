@@ -23,6 +23,8 @@ fs.writeFileSync settings_path, JSON.stringify(settings, null, 2)
 exec 'crontab < crontab'
 
 scraper = exec './scraper.py', (err, stdout, stderr) ->
-  console.warn err if err?
-  process.stdout.write stdout if stdout?
-  process.stderr.write stderr if stderr?
+  output =
+    error: stderr
+    response: stdout
+    debug: err
+  process.stdout.write JSON.stringify(output)
