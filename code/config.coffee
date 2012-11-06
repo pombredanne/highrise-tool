@@ -27,6 +27,7 @@ $ ->
               <a href="#">Take a look &rarr;</a>
             </div>
           """
+          $.cookie 'datasets', 'highrise'
         else
           $('#highrise-setup .alert').remove()
           $('#highrise-setup').prepend """
