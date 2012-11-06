@@ -3,7 +3,7 @@
 fs = require 'fs'
 {exec} = require 'child_process'
 
-if process.argv.length < 3
+if process.argv.length <= 1
   process.stdout.write fs.readFileSync('./highrise/templates/config.html')
   process.exit 0
 
