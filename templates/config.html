@@ -53,7 +53,15 @@
           cmd: cmd
         },
         success: function(text) {
-          return $('#highrise-setup').html('<div class="alert alert-success"><strong>Great!</strong> Your data has been imported. <a href="#">Take a look &rarr;</a></div>');
+          var data;
+          data = JSON.parse(text);
+          if (data.err === '') {
+            return $('#highrise-setup').html("<div class=\"alert alert-success\">\n  <strong>Great!</strong> \n  Your data has been imported. \n  <a href=\"#\">Take a look &rarr;</a>\n</div>");
+          } else {
+            $('#highrise-setup').prepend("<div class=\"alert alert-error\">\n  <strong>Oh noes!</strong> " + data.err + "\n</div>");
+            $(this).attr('disabled', false);
+            return $(this).removeClass('loading');
+          }
         },
         error: function(jqXHR, textStatus, errorThrown) {
           $(_this).attr('disabled', false);

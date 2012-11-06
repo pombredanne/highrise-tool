@@ -18,7 +18,24 @@ $ ->
         apikey: apikey
         cmd: cmd
       success: (text) ->
-        $('#highrise-setup').html('<div class="alert alert-success"><strong>Great!</strong> Your data has been imported. <a href="#">Take a look &rarr;</a></div>');
+        data = JSON.parse text
+        if data.err is ''
+          $('#highrise-setup').html """
+            <div class="alert alert-success">
+              <strong>Great!</strong> 
+              Your data has been imported. 
+              <a href="#">Take a look &rarr;</a>
+            </div>
+          """
+        else
+          $('#highrise-setup').prepend """
+            <div class="alert alert-error">
+              <strong>Oh noes!</strong> #{data.err}
+            </div>
+          """
+          $(@).attr 'disabled', no
+          $(@).removeClass 'loading'
+
       error: (jqXHR, textStatus, errorThrown) =>
         $(@).attr 'disabled', no
         $(@).removeClass 'loading'
