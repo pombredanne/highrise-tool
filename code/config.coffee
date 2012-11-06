@@ -28,6 +28,7 @@ $ ->
             </div>
           """
         else
+          $('#highrise-setup .alert').remove()
           $('#highrise-setup').prepend """
             <div class="alert alert-error">
               <strong>Oh noes!</strong> #{data.error}
