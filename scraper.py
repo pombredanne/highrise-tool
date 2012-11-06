@@ -90,7 +90,7 @@ def get_session():
 def get_deals():
     deal_lookup={'deal_name':'name', 'deal_id':'id', 'owner_id':'responsible-party-id', 'created':'created-at', 'updated':'updated-at', 'super_status':'status', 'price':'price'}
     
-    deals = lxml.html.fromstring(get_xml('https://%s/deals.xml' % DOMAIN).cssselect('deals deal'))
+    deals = lxml.html.fromstring(get_xml('https://%s/deals.xml' % DOMAIN)).cssselect('deals deal')
      
     dealbuilder=[]
     for deal in deals:
