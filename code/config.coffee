@@ -17,9 +17,9 @@ $ ->
       data:
         apikey: apikey
         cmd: cmd
-      success: (text) ->
+      success: (text) =>
         data = JSON.parse text
-        if data.err is ''
+        if data.error is ''
           $('#highrise-setup').html """
             <div class="alert alert-success">
               <strong>Great!</strong> 
@@ -30,7 +30,7 @@ $ ->
         else
           $('#highrise-setup').prepend """
             <div class="alert alert-error">
-              <strong>Oh noes!</strong> #{data.err}
+              <strong>Oh noes!</strong> #{data.error}
             </div>
           """
           $(@).attr 'disabled', no
