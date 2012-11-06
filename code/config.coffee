@@ -8,6 +8,9 @@ $ ->
     hr_domain = $('#domain').val()
     cmd = "cd ~/highrise; ./setup  #{hr_user} #{hr_pwd} #{hr_domain}"
 
+    $(@).attr 'disabled', yes
+    $(@).addClass 'loading'
+
     $.ajax
       url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
       type: 'POST'
@@ -16,5 +19,7 @@ $ ->
         cmd: cmd
       success: (text) ->
         $('#highrise-setup').html('<div class="alert alert-success"><strong>Great!</strong> Your data has been imported. <a href="#">Take a look &rarr;</a></div>');
-      error: (jqXHR, textStatus, errorThrown) ->
-        $('#highrise-setup').prepend('<div class="alert alert-error"><strong>On noes!</strong> ' + jqXHR.responseText);
+      error: (jqXHR, textStatus, errorThrown) =>
+        $(@).attr 'disabled', no
+        $(@).removeClass 'loading'
+        $('#highrise-setup').prepend('<div class="alert alert-error"><strong>On noes!</strong> ' + jqXHR.responseText)

@@ -30,17 +30,21 @@
 </div>
 
 <script type="text/javascript">
+
 (function() {
 
   $(function() {
     var apikey, box, user, _ref;
     _ref = [window.user, window.apikey, window.box], user = _ref[0], apikey = _ref[1], box = _ref[2];
     return $('#import').on('click', function() {
-      var cmd, hr_domain, hr_pwd, hr_user;
+      var cmd, hr_domain, hr_pwd, hr_user,
+        _this = this;
       hr_user = $('#username').val();
       hr_pwd = $('#password').val();
       hr_domain = $('#domain').val();
       cmd = "cd ~/highrise; ./setup  " + hr_user + " " + hr_pwd + " " + hr_domain;
+      $(this).attr('disabled', true);
+      $(this).addClass('loading');
       return $.ajax({
         url: "http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec",
         type: 'POST',
@@ -52,6 +56,8 @@
           return $('#highrise-setup').html('<div class="alert alert-success"><strong>Great!</strong> Your data has been imported. <a href="#">Take a look &rarr;</a></div>');
         },
         error: function(jqXHR, textStatus, errorThrown) {
+          $(_this).attr('disabled', false);
+          $(_this).removeClass('loading');
           return $('#highrise-setup').prepend('<div class="alert alert-error"><strong>On noes!</strong> ' + jqXHR.responseText);
         }
       });
