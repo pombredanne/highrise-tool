@@ -56,9 +56,13 @@
           data = JSON.parse(text);
           if (data.error === '') {
             $('#highrise-setup').html("<div class=\"alert alert-success\">\n  <strong>Great!</strong> \n  Your data has been imported. \n  <a href=\"#\">Take a look &rarr;</a>\n</div>");
-            return $.cookie('datasets', 'highrise', {
+            return $.cookie('datasets', JSON.stringify({
+              highrise: {
+                box: "" + user + "/" + box
+              }
+            }, {
               path: '/'
-            });
+            }));
           } else {
             $('#highrise-setup .alert').remove();
             $('#highrise-setup').prepend("<div class=\"alert alert-error\">\n  <strong>Oh noes!</strong> " + data.error + "\n</div>");

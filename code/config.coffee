@@ -27,7 +27,8 @@ $ ->
               <a href="#">Take a look &rarr;</a>
             </div>
           """
-          $.cookie 'datasets', 'highrise', { path: '/' }
+          $.cookie 'datasets', JSON.stringify { highrise: { box: "#{user}/#{box}" } },
+            { path: '/' }
         else
           $('#highrise-setup .alert').remove()
           $('#highrise-setup').prepend """
