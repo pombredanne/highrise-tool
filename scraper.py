@@ -17,9 +17,14 @@ user_list = {}
 def get_settings():
     with open('../scraperwiki.json') as f:
         settings = json.load(f)
-        return settings['highrise']['username'], \
-               settings['highrise']['password'], \
-               settings['highrise']['domain']
+        try:
+            return settings['highrise']['username'], \
+                   settings['highrise']['password'], \
+                   settings['highrise']['domain']
+        except KeyError as err:
+            sys.stderr.write("Could not find your Highrise %s" % err.message)
+            exit(1)
+
 
 def setup():
     global user_list
