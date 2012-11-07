@@ -33,8 +33,10 @@
 (function() {
 
   $(function() {
-    var apikey, box, user, _ref;
-    _ref = [window.user, window.apikey, window.box], user = _ref[0], apikey = _ref[1], box = _ref[2];
+    var apikey, boxname, boxurl, org, prj, _ref;
+    _ref = [window.user, window.apikey, window.box], org = _ref[0], apikey = _ref[1], prj = _ref[2];
+    boxname = "" + org + "/" + prj;
+    boxurl = "http://boxecutor-dev-1.scraperwiki.net/" + boxname;
     return $('#import').on('click', function() {
       var cmd, hr_domain, hr_pwd, hr_user,
         _this = this;
@@ -45,7 +47,7 @@
       $(this).attr('disabled', true);
       $(this).addClass('loading');
       return $.ajax({
-        url: "http://boxecutor-dev-1.scraperwiki.net/" + user + "/" + box + "/exec",
+        url: "" + boxurl + "/exec",
         type: 'POST',
         data: {
           apikey: apikey,
@@ -55,10 +57,23 @@
           var data;
           data = JSON.parse(text);
           if (data.error === '') {
-            $('#highrise-setup').html("<div class=\"alert alert-success\">\n  <strong>Great!</strong> \n  Your data has been imported. \n  <a href=\"#\">Take a look &rarr;</a>\n</div>");
+            $.ajax({
+              url: "" + boxurl + "/exec",
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                apikey: apikey,
+                cmd: "cat ~/scraperwiki.json"
+              },
+              success: function(data) {
+                var boxPublishToken;
+                boxPublishToken = data.publish_token;
+                return $('#content').html("<iframe style=\"width:100%;height:100%\" src=\"" + boxurl + "/" + boxPublishToken + "/http/spreadsheet-tool/\"></iframe>");
+              }
+            });
             return $.cookie('datasets', JSON.stringify({
               highrise: {
-                box: "" + user + "/" + box
+                box: "" + boxname
               }
             }, {
               path: '/'

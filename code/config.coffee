@@ -1,6 +1,8 @@
 $ ->
-  [user, apikey, box] = \
+  [org, apikey, prj] = \
     [window.user, window.apikey, window.box]
+  boxname = "#{org}/#{prj}"
+  boxurl = "http://boxecutor-dev-1.scraperwiki.net/#{boxname}"
 
   $('#import').on 'click', ->
     hr_user = $('#username').val()
@@ -12,7 +14,7 @@ $ ->
     $(@).addClass 'loading'
 
     $.ajax
-      url: "http://boxecutor-dev-1.scraperwiki.net/#{user}/#{box}/exec"
+      url: "#{boxurl}/exec"
       type: 'POST'
       data:
         apikey: apikey
@@ -20,14 +22,17 @@ $ ->
       success: (text) =>
         data = JSON.parse text
         if data.error is ''
-          $('#highrise-setup').html """
-            <div class="alert alert-success">
-              <strong>Great!</strong> 
-              Your data has been imported. 
-              <a href="#">Take a look &rarr;</a>
-            </div>
-          """
-          $.cookie 'datasets', JSON.stringify { highrise: { box: "#{user}/#{box}" } },
+          $.ajax
+            url: "#{boxurl}/exec"
+            type: 'POST'
+            dataType: 'json'
+            data:
+              apikey: apikey
+              cmd: "cat ~/scraperwiki.json"
+            success: (data) ->
+              boxPublishToken = data.publish_token
+              $('#content').html """<iframe style="width:100%;height:100%" src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
+          $.cookie 'datasets', JSON.stringify { highrise: { box: "#{boxname}" } },
             { path: '/' }
         else
           $('#highrise-setup .alert').remove()
