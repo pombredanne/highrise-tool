@@ -46,6 +46,7 @@
       cmd = "cd ~/highrise; ./setup  " + hr_user + " " + hr_pwd + " " + hr_domain;
       $(this).attr('disabled', true);
       $(this).addClass('loading');
+      $(this).html('Importing&hellip;');
       return $.ajax({
         url: "" + boxurl + "/exec",
         type: 'POST',
