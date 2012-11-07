@@ -31,7 +31,7 @@ $ ->
               cmd: "cat ~/scraperwiki.json"
             success: (data) ->
               boxPublishToken = data.publish_token
-              $('#content').html """<iframe style="width:100%;height:100%" src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
+              $('#content').html """<iframe style="border:none;width:100%;height:100%" src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
           $.cookie 'datasets', JSON.stringify { highrise: { box: "#{boxname}" } },
             { path: '/' }
         else
