@@ -22,15 +22,17 @@ fs.writeFileSync settings_path, JSON.stringify(settings, null, 2)
 
 exec 'crontab < crontab'
 
-output = []
+output =
+  error: ''
+  response: ''
+  debug: ''
+
 exec './spreadsheet-install.sh', (err, stdout, stderr) ->
-  output.push
-    error: stderr
-    response: stdout
-    debug: err
+  output.error += stderr
+  output.response += response
+  output.err += err
   scraper = exec './scraper.py', (err, stdout, stderr) ->
-    output.push
-      error: stderr
-      response: stdout
-      debug: err
+    output.error += stderr
+    output.response += response
+    output.err += err
     process.stdout.write JSON.stringify(output)
