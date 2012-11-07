@@ -29,10 +29,10 @@ output =
 
 exec './spreadsheet-install.sh', (err, stdout, stderr) ->
   output.error += stderr
-  output.response += response
+  output.response += stdout
   output.err += err
   scraper = exec './scraper.py', (err, stdout, stderr) ->
     output.error += stderr
-    output.response += response
+    output.response += stdout
     output.err += err
     process.stdout.write JSON.stringify(output)
