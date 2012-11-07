@@ -27,7 +27,7 @@ output =
   response: ''
   debug: ''
 
-exec './spreadsheet-install.sh', (err, stdout, stderr) ->
+exec './install-extras.sh', (err, stdout, stderr) ->
   output.error += stderr
   output.response += stdout
   output.err += err
