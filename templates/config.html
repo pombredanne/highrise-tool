@@ -68,7 +68,7 @@
               success: function(data) {
                 var boxPublishToken;
                 boxPublishToken = data.publish_token;
-                return $('#content').html("<iframe style=\"width:100%;height:100%\" src=\"" + boxurl + "/" + boxPublishToken + "/http/spreadsheet-tool/\"></iframe>");
+                return $('#content').html("<iframe src=\"" + boxurl + "/" + boxPublishToken + "/http/spreadsheet-tool/\"></iframe>");
               }
             });
             return $.cookie('datasets', JSON.stringify({

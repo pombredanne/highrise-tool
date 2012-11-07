@@ -30,8 +30,9 @@ $ ->
               apikey: apikey
               cmd: "cat ~/scraperwiki.json"
             success: (data) ->
+              # :todo: is broken when no publishToken: fix.
               boxPublishToken = data.publish_token
-              $('#content').html """<iframe style="border:none;width:100%;height:100%" src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
+              $('#content').html """<iframe src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
           $.cookie 'datasets', JSON.stringify { highrise: { box: "#{boxname}" } },
             { path: '/' }
         else
