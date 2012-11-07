@@ -12,6 +12,7 @@ $ ->
 
     $(@).attr 'disabled', yes
     $(@).addClass 'loading'
+    $(@).html 'Importing&hellip;'
 
     $.ajax
       url: "#{boxurl}/exec"
