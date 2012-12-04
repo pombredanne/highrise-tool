@@ -1,6 +1,6 @@
 $ ->
   [org, apikey, prj] = \
-    [window.user, window.apikey, window.box]
+    [window.user.shortName, window.user.apiKey, window.box]
   boxname = "#{org}/#{prj}"
   boxurl = "http://boxecutor-dev-1.scraperwiki.net/#{boxname}"
 
@@ -21,16 +21,16 @@ $ ->
         apikey: apikey
         cmd: cmd
       success: (text) =>
-        data = JSON.parse text
+        data = JSON.parse String(text)
         if data.error is ''
           $.ajax
             url: "#{boxurl}/exec"
             type: 'POST'
-            dataType: 'json'
             data:
               apikey: apikey
               cmd: "cat ~/scraperwiki.json"
             success: (data) ->
+              data = JSON.parse String(data)
               # :todo: is broken when no publishToken: fix.
               boxPublishToken = data.publish_token
               $('#content').html """<iframe src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
