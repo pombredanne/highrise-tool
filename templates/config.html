@@ -73,13 +73,7 @@
                 return $('#content').html("<iframe src=\"" + boxurl + "/" + boxPublishToken + "/http/spreadsheet-tool/\"></iframe>");
               }
             });
-            return $.cookie('datasets', JSON.stringify({
-              highrise: {
-                box: "" + boxname
-              }
-            }, {
-              path: '/'
-            }));
+            return window.content.trigger('tool:installed');
           } else {
             $('#highrise-setup .alert').remove();
             $('#highrise-setup').prepend("<div class=\"alert alert-error\">\n  <strong>Oh noes!</strong> " + data.error + "\n</div>");
