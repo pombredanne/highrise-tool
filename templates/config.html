@@ -30,7 +30,6 @@
 </div>
 
 <script type="text/javascript">
-
 (function() {
 
   $(function() {
@@ -59,20 +58,6 @@
           var data;
           data = JSON.parse(String(text));
           if (data.error === '') {
-            $.ajax({
-              url: "" + boxurl + "/exec",
-              type: 'POST',
-              data: {
-                apikey: apikey,
-                cmd: "cat ~/scraperwiki.json"
-              },
-              success: function(data) {
-                var boxPublishToken;
-                data = JSON.parse(String(data));
-                boxPublishToken = data.publish_token;
-                return $('#content').html("<iframe src=\"" + boxurl + "/" + boxPublishToken + "/http/spreadsheet-tool/\"></iframe>");
-              }
-            });
             return window.content.trigger('tool:installed');
           } else {
             $('#highrise-setup .alert').remove();

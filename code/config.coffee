@@ -23,17 +23,6 @@ $ ->
       success: (text) =>
         data = JSON.parse String(text)
         if data.error is ''
-          $.ajax
-            url: "#{boxurl}/exec"
-            type: 'POST'
-            data:
-              apikey: apikey
-              cmd: "cat ~/scraperwiki.json"
-            success: (data) ->
-              data = JSON.parse String(data)
-              # TODO: is broken when no publishToken: fix.
-              boxPublishToken = data.publish_token
-              $('#content').html """<iframe src="#{boxurl}/#{boxPublishToken}/http/spreadsheet-tool/"></iframe>"""
           window.content.trigger 'tool:installed'
         else
           $('#highrise-setup .alert').remove()
