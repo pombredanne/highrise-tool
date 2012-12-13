@@ -17,7 +17,7 @@ then
   git pull
   )
 else
-  git clone git://github.com/scraperwiki/spreadsheet-tool.git
+  git clone git://github.com/scraperwiki/spreadsheet-tool.git http
 fi
 
 sed -i "/^sqliteEndpoint/s@.*@sqliteEndpoint = '../../sqlite'; // Added by spreadsheet-install.sh@" spreadsheet-tool/js/spreadsheet-tool.js
