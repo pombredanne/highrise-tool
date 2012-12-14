@@ -36,7 +36,7 @@
     var apikey, boxname, boxurl, org, prj, _ref;
     _ref = [window.user.shortName, window.user.apiKey, window.box], org = _ref[0], apikey = _ref[1], prj = _ref[2];
     boxname = "" + org + "/" + prj;
-    boxurl = "http://boxecutor-dev-1.scraperwiki.net/" + boxname;
+    boxurl = "" + window.boxServer + "/" + boxname;
     return $('#import').on('click', function() {
       var cmd, hr_domain, hr_pwd, hr_user,
         _this = this;

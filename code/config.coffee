@@ -2,7 +2,7 @@ $ ->
   [org, apikey, prj] = \
     [window.user.shortName, window.user.apiKey, window.box]
   boxname = "#{org}/#{prj}"
-  boxurl = "http://boxecutor-dev-1.scraperwiki.net/#{boxname}"
+  boxurl = "#{window.boxServer}/#{boxname}"
 
   $('#import').on 'click', ->
     hr_user = $('#username').val()
