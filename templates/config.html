@@ -34,7 +34,7 @@
 
   $(function() {
     var apikey, boxname, boxurl, org, prj, _ref;
-    _ref = [window.user.shortName, window.user.apiKey, window.box], org = _ref[0], apikey = _ref[1], prj = _ref[2];
+    _ref = [window.user.effective.shortName, window.user.effective.apiKey, window.box], org = _ref[0], apikey = _ref[1], prj = _ref[2];
     boxname = "" + org + "/" + prj;
     boxurl = "" + window.boxServer + "/" + boxname;
     return $('#import').on('click', function() {

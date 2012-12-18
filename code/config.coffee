@@ -1,6 +1,6 @@
 $ ->
   [org, apikey, prj] = \
-    [window.user.shortName, window.user.apiKey, window.box]
+    [window.user.effective.shortName, window.user.effective.apiKey, window.box]
   boxname = "#{org}/#{prj}"
   boxurl = "#{window.boxServer}/#{boxname}"
 
