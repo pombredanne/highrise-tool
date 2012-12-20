@@ -9,14 +9,18 @@ boxname=$(whoami | sed 's:\.:/:')
 
 (
 cd ~/http
-if test -e index.html
+if test -e spreadsheet-tool
 then
+  # Should only get here in testing.
+  (
+  cd spreadsheet-tool
   git pull
+  )
 else
-  git clone git://github.com/scraperwiki/spreadsheet-tool.git .
+  git clone git://github.com/scraperwiki/spreadsheet-tool.git
 fi
 
-sed -i "/^sqliteEndpoint/s@.*@sqliteEndpoint = '../sqlite'; // Added by spreadsheet-install.sh@" js/spreadsheet-tool.js
+sed -i "/^sqliteEndpoint/s@.*@sqliteEndpoint = '../../sqlite'; // Added by spreadsheet-install.sh@" spreadsheet-tool/js/spreadsheet-tool.js
 )
 
 # Install CSV download tool.
