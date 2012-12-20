@@ -52,3 +52,5 @@ printf ']'
 EOF
 chmod +x download
 
+mkdir ~/http/csvdownload-tool
+cp ~/highrise/templates/csv.html ~/http/csvdownload-tool/index.html

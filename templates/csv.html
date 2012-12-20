@@ -1,0 +1,17 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script>
+
+$.ajax({
+        type: 'POST',
+        url: '../../../exec',
+        data: { apikey: location.hash.replace('#', ''),
+                cmd: "cd; ./highrise/download"
+              },
+        dataType: 'json'
+       }).success( function(data) {
+         $.each(data, function(i, csv) {
+            $('<iframe src="../'+csv+'">').hide().appendTo('body');
+         }
+         );
+       })
+</script>
