@@ -23,7 +23,7 @@ $ ->
       success: (text) =>
         data = JSON.parse String(text)
         if data.error is ''
-          window.content.trigger 'tool:installed'
+          Backbone.trigger 'tool:installed'
         else
           $('#highrise-setup .alert').remove()
           $('#highrise-setup').prepend """

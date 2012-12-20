@@ -58,7 +58,7 @@
           var data;
           data = JSON.parse(String(text));
           if (data.error === '') {
-            return window.content.trigger('tool:installed');
+            return Backbone.trigger('tool:installed');
           } else {
             $('#highrise-setup .alert').remove();
             $('#highrise-setup').prepend("<div class=\"alert alert-error\">\n  <strong>Oh noes!</strong> " + data.error + "\n</div>");
