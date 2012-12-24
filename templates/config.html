@@ -33,10 +33,9 @@
 (function() {
 
   $(function() {
-    var apikey, boxname, boxurl, org, prj, _ref;
-    _ref = [window.user.effective.shortName, window.user.effective.apiKey, window.box], org = _ref[0], apikey = _ref[1], prj = _ref[2];
-    boxname = "" + org + "/" + prj;
-    boxurl = "" + window.boxServer + "/" + boxname;
+    var apikey, boxurl, prj, shortName, _ref;
+    _ref = [window.user.effective.shortName, window.user.effective.apiKey, window.box], shortName = _ref[0], apikey = _ref[1], prj = _ref[2];
+    boxurl = "" + window.boxServer + "/" + window.box;
     return $('#import').on('click', function() {
       var cmd, hr_domain, hr_pwd, hr_user,
         _this = this;

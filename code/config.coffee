@@ -1,8 +1,7 @@
 $ ->
-  [org, apikey, prj] = \
+  [shortName, apikey, prj] = \
     [window.user.effective.shortName, window.user.effective.apiKey, window.box]
-  boxname = "#{org}/#{prj}"
-  boxurl = "#{window.boxServer}/#{boxname}"
+  boxurl = "#{window.boxServer}/#{window.box}"
 
   $('#import').on 'click', ->
     hr_user = $('#username').val()
