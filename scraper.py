@@ -9,7 +9,7 @@ import json
 import urlparse
 
 # retry 5 times, as Highrise seems ropey
-requests.defaults.defaults['max_retries'] = 5
+# requests.defaults.defaults['max_retries'] = 5
 
 user_list = {}
 
